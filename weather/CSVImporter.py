@@ -70,6 +70,9 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
             'sealevelpressure', 'visibility', 'solarradiation']
     df[float_cols] = df[float_cols].fillna(0).astype(float)
 
+    # 화씨 -> 섭씨 변환 추가
+    df["temp"] = (df["temp"] - 32) * 5 / 9
+
     # drop unnecessary columns
     sorted_cols = ['year', 'month', 'day', 'temp', 'humidity', 'cloudy',
             'precip', 'snow', 'windspeed', 'winddir',
